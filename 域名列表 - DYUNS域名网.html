@@ -1,0 +1,376 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="csrf-token" content="HV87NPvsM1wgw73XVhAyF275W3Ww1TSnOCI1GYpc">
+<title>域名列表 - DYUNS域名网</title>
+<script type="4f5db710e5ea1fbd1f8b59fe-text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4edcba6ffd21d5824ff4aeb6b6b49bb5";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+<header class="navbar navbar-expand flex-md-row bd-navbar">
+<div class="navbar-nav-scroll">
+<ul class="navbar-nav bd-navbar-nav flex-row">
+<li class="nav-item d-sm-none" id="menu">
+<a class="nav-link nav-menu" href="#">
+<i class="fa fa-bars fa-lg"></i>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-logo-name" href="/"><i class="fa fa-cloud"></i>DYUNS域名网</a>
+</li>
+</ul>
+</div>
+<ul class="navbar-nav flex-row ml-auto d-md-flex">
+<li class="nav-item dropdown">
+<a class="nav-item nav-link dropdown-toggle" href="#" id="user_btns" data-toggle="dropdown">yang<span class="d-none d-sm-inline">[免费账户]</span>
+</a>
+<div class="dropdown-menu dropdown-menu-right" aria-labelledby="user_btns">
+<a class="dropdown-item" href="/home/profile">修改密码</a>
+<a class="dropdown-item" href="/logout" onclick="if (!window.__cfRLUnblockHandlers) return false; return confirm('您确认要退出登录吗？');" data-cf-modified-4f5db710e5ea1fbd1f8b59fe-="">退出登录</a>
+</div>
+</li>
+</ul>
+</header>
+<div class="container-fluid">
+<div class="row flex-xl-nowrap">
+<div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+<div class="menu-item">
+<a href="/home" class="menu-link">
+<i class="fa fa-globe"></i> 域名列表
+</a>
+</div>
+<div class="menu-item">
+<a href="/home/point" class="menu-link">
+<i class="fa fa-cube"></i> 积分明细
+</a>
+</div>
+<div class="menu-item">
+<a class="menu-link" data-toggle="collapse" href="#menu-user">
+<i class="fa fa-user"></i> 邀请激励
+<i class="fa fa-caret-down float-right"></i>
+</a>
+<ul class="collapse" id="menu-user">
+<li>
+<a href="/invite/link">
+<i class="fa fa-caret-right"></i> 邀请链接
+</a>
+</li>
+<li>
+<a href="/invite/record">
+<i class="fa fa-caret-right"></i> 邀请记录
+</a>
+</li>
+<li>
+<a href="/invite/exchange">
+<i class="fa fa-caret-right"></i> 激励兑换
+</a>
+</li>
+</ul>
+</div>
+</div>
+<main class="col-12 col-md-9 col-xl-10 py-md-3 pl-md-5 bd-content">
+<div class="alert alert-primary">
+本平台为广大用户提供多种后缀类型的二级域名的注册服务。<br />
+本站官网域名为[<a href="https://www.dyuns.com/">www.dyuns.com</a>]<br />
+联系我们：<br />
+邮箱：<a href="/cdn-cgi/l/email-protection#55262025253a272115312c203b267b363a38" target="_blank"><span class="__cf_email__" data-cfemail="e99a9c9999869b9da98d909c879ac78a8684">[email&#160;protected]</span></a><br />
+QQ群：<a href="/qqgroup">前往加入QQ群</a>
+QQ：<a href="/qqcustomerservice">前往联系QQ客服</a><br />
+活动：<a href="/activities/memberservicefreebenefitplan-2021111301.html">会员服务免费福利</a>
+</div>
+<div id="vue" class="pt-3 pt-sm-0">
+<div class="card">
+<div class="card-header">
+域名列表
+<a href="#modal-store" data-toggle="modal" @click="storeInfo={did:domainList.length>0?domainList[0].did:0,line_id:0,type:'A'}" class="float-right btn btn-sm btn-primary">添加</a>
+</div>
+<div class="card-header">
+<div class="form-inline">
+<input type="text" disabled="disabled" class="d-none">
+<div class="form-group">
+<select class="form-control" v-model="search.did">
+<option value="0">所有域名</option>
+<option v-for="(domain,i) in domainList" :value="domain.did">{{ domain.domain }}</option>
+</select>
+</div>
+<div class="form-group ml-1">
+<select class="form-control" v-model="search.type">
+<option value="0">所有记录</option>
+<option value="A">A记录</option>
+<option value="CNAME">CANME记录</option>
+</select>
+</div>
+<div class="form-group ml-1">
+<input type="text" placeholder="域名前缀" class="form-control" v-model="search.name">
+</div>
+<div class="form-group ml-1">
+<input type="text" placeholder="解析地址" class="form-control" v-model="search.value">
+</div>
+<a class="btn btn-info ml-1" @click="getList(1)"><i class="fa fa-search"></i> 搜索</a></div>
+</div>
+<div class="card-body">
+<div class="table-responsive">
+<table class="table table-bordered">
+<thead>
+<tr>
+<th>ID</th>
+<th>域名</th>
+<th>记录类型</th>
+<th>线路</th>
+<th>解析地址</th>
+<th>添加时间</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody v-cloak="">
+<tr v-for="(row,i) in data.data" :key="i">
+<td>{{ row.id }}</td>
+<td>
+<a :href="'http://'+row.name+'.'+(row.domain?row.domain.domain:'')" target="_blank">
+{{ row.name }}.{{ row.domain?row.domain.domain:'' }}
+</a>
+</td>
+<td>{{ row.type }}</td>
+<td>{{ row.line }}</td>
+<td>{{ row.value }}</td>
+<td>{{ row.created_at }}</td>
+<td>
+<a href="#modal-store" class="btn btn-sm btn-info" data-toggle="modal" @click="storeInfo=Object.assign({},row)">修改
+</a>
+<a class="btn btn-sm btn-danger" @click="del(row.id)">删除</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="card-footer pb-0 text-center">
+<nav v-cloak="">
+<ul class="pagination" v-if="data.last_page>1">
+<li class="page-item" @click="getList(1)" v-if="data.current_page>1">
+<a class="page-link">1</a>
+</li>
+<li class="page-item" v-if="data.current_page-3>1"><a class="page-link">…</a></li>
+<li class="page-item" v-if="data.current_page-2>1" @click="getList(data.current_page-2)">
+<a class="page-link">{{ data.current_page-2 }}</a>
+</li>
+<li class="page-item" v-if="(data.current_page-1)>1" @click="getList(data.current_page-1)">
+<a class="page-link">{{ data.current_page-1 }}</a>
+</li>
+<li class="page-item active"><a class="page-link">{{ data.current_page }}</a></li>
+<li class="page-item" v-if="data.current_page+1<data.last_page" @click="getList(data.current_page+1)">
+<a class="page-link">{{ data.current_page+1 }}</a>
+</li>
+<li class="page-item" v-if="data.current_page+2<data.last_page" @click="getList(data.current_page+2)">
+<a class="page-link">{{ data.current_page+2 }}</a>
+</li>
+<li class="page-item" v-if="data.current_page+3<data.last_page"><a class="page-link">…</a></li>
+<li class="page-item">
+<a class="page-link" @click="getList(data.last_page)" v-if="data.last_page>data.current_page">
+{{ data.last_page }}</a>
+</li>
+</ul>
+</nav> </div>
+</div>
+<div class="modal fade" id="modal-store">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="exampleModalLabel">记录添加/修改</h5>
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<form id="form-store">
+<input type="hidden" name="action" value="recordStore">
+<input type="hidden" name="id" :value="storeInfo.id" v-if="storeInfo.id">
+<input type="hidden" name="did" :value="storeInfo.did" v-if="storeInfo.id">
+<div class="form-group row">
+<label for="staticEmail" class="col-sm-2 col-form-label">域名前缀</label>
+<div class="col-sm-10">
+<div class="input-group">
+<input type="text" name="name" class="form-control" v-model="storeInfo.name">
+<select class="form-control" name="did" style="flex: none;width: 100px;" v-model="storeInfo.did" :disabled="storeInfo.id">
+<option v-for="(domain,i) in domainList" :value="domain.did">
+{{ domain.domain }}
+</option>
+</select>
+</div>
+<div style="border: 1px solid #ced4da;border-radius: .25rem;padding: .375rem .75rem;margin-top: .25rem;font-size: 14px;color: grey;" v-if="desc" v-html="desc"></div>
+</div>
+</div>
+<div class="form-group row">
+<label for="staticEmail" class="col-sm-2 col-form-label">记录类型</label>
+<div class="col-sm-10">
+<select class="form-control" name="type" v-model="storeInfo.type">
+<option value="A">A (解析到服务器IP)</option>
+<option value="CNAME">CNAME (解析到CNAME域名)</option>
+</select>
+</div>
+</div>
+<div class="form-group row">
+ <label for="staticEmail" class="col-sm-2 col-form-label">解析地址</label>
+<div class="col-sm-10">
+<input type="text" name="value" class="form-control" placeholder="请填写服务器IP/CNAME域名" v-model="storeInfo.value">
+</div>
+</div>
+<div class="form-group row">
+<label for="staticEmail" class="col-sm-2 col-form-label">线路</label>
+<div class="col-sm-10">
+<select class="form-control" name="line_id" v-model="storeInfo.line_id">
+<option v-for="(line,i) in getLineList()" :value="line.Id">
+{{ line.Name }}
+</option>
+</select>
+</div>
+</div>
+<div class="form-group row">
+<label for="staticEmail" class="col-sm-2 col-form-label">积分</label>
+<div class="col-sm-10">
+<input type="text" class="form-control" :value="getDomainPoint()+' 积分/条'" disabled>
+</div>
+</div>
+</form>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+<button type="button" class="btn btn-primary" @click="form('store')">确认</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="4f5db710e5ea1fbd1f8b59fe-|49" defer=""></script></body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js" type="4f5db710e5ea1fbd1f8b59fe-text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js" type="4f5db710e5ea1fbd1f8b59fe-text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js" type="4f5db710e5ea1fbd1f8b59fe-text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/layer/2.3/layer.js" type="4f5db710e5ea1fbd1f8b59fe-text/javascript"></script>
+<script src="/js/main.js" type="4f5db710e5ea1fbd1f8b59fe-text/javascript"></script>
+<script type="4f5db710e5ea1fbd1f8b59fe-text/javascript">
+    var showMenu = false;
+    $("#menu").click(function () {
+        if (showMenu) {
+            $(".bd-sidebar").removeClass('openMenu');
+            $(".bd-content").removeClass('moveRight');
+            $(".bd-content").addClass('moveAnimation');
+            showMenu = false;
+        } else {
+            $(".bd-content").removeClass('moveAnimation');
+            $(".bd-sidebar").addClass('openMenu');
+            $(".bd-content").addClass('moveRight');
+            showMenu = true;
+        }
+    });
+</script>
+<script type="4f5db710e5ea1fbd1f8b59fe-text/javascript">
+        new Vue({
+            el: '#vue',
+            data: {
+                search: {
+                    page: 1, did: 0, name: '', type: 0, value: ''
+                },
+                domainList: [],
+                data: {},
+                storeInfo: {
+                    did: 0,
+                    line_id: 0
+                },
+                selectDid: 0,
+                desc: ''
+            },
+            methods: {
+                getDomainPoint: function () {
+                    var vm = this;
+                    for (var i = 0; i < this.domainList.length; i++) {
+                        if (this.domainList[i].did === this.storeInfo.did) {
+                            vm.desc = this.domainList[i].desc;
+                            return this.domainList[i].point;
+                        }
+                    }
+                    return 0;
+                },
+                getLineList: function () {
+                    for (var i = 0; i < this.domainList.length; i++) {
+                        if (this.domainList[i].did === this.storeInfo.did) {
+                            if (this.selectDid != this.storeInfo.did) {
+                                this.storeInfo.line_id = this.domainList[i].line[0].Id;
+                                this.selectDid = this.storeInfo.did
+                            }
+                            return this.domainList[i].line;
+                        }
+                    }
+                    return [{Name: '默认', Id: 0}];
+                },
+                getList: function (page) {
+                    var vm = this;
+                    vm.search.page = typeof page === 'undefined' ? vm.search.page : page;
+                    this.$post("/home", vm.search, {action: 'recordList'})
+                        .then(function (data) {
+                            if (data.status === 0) {
+                                vm.data = data.data
+                            } else {
+                                vm.$message(data.message, 'error');
+                            }
+                        })
+                },
+                getDomainList: function (page) {
+                    var vm = this;
+                    this.$post("/home", vm.search, {action: 'domainList'})
+                        .then(function (data) {
+                            if (data.status === 0) {
+                                vm.domainList = data.data
+                            } else {
+                                vm.$message(data.message, 'error');
+                            }
+                        })
+                },
+                form: function (id) {
+                    var vm = this;
+                    this.$post("/home", $("#form-" + id).serialize())
+                        .then(function (data) {
+                            if (data.status === 0) {
+                                vm.getList();
+                                $("#modal-" + id).modal('hide');
+                                vm.$message(data.message, 'success');
+                            } else {
+                                vm.$message(data.message, 'error');
+                            }
+                        });
+                },
+                del: function (id) {
+                    if (!confirm('确认删除？')) return;
+                    var vm = this;
+                    this.$post("/home", {action: 'recordDelete', id: id})
+                        .then(function (data) {
+                            if (data.status === 0) {
+                                vm.getList();
+                                vm.$message(data.message, 'success');
+                            } else {
+                                vm.$message(data.message, 'error');
+                            }
+                        });
+                },
+            },
+            mounted: function () {
+                this.getDomainList();
+                this.getList();
+            }
+        });
+    </script>
+</html>
